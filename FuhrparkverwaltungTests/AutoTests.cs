@@ -21,6 +21,19 @@ namespace FuhrparkverwaltungTests
             Assert.AreEqual(50, a.Kilometerstand);
         }
 
-        
+        [TestMethod]
+        public void Kilometerstand_SollNichtVerändertWerdenBeiNegativemWert()
+        {
+            //Arragne
+            int kilometerstand = 10;
+            Auto a = new Auto(kilometerstand);
+            int streckeInKilometern = -10;
+
+            //Act
+            a.Fahren(streckeInKilometern);
+
+            //Assert
+            Assert.AreEqual(kilometerstand, a.Kilometerstand);
+        }
     }
 }
