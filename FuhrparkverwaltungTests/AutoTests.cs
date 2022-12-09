@@ -35,5 +35,21 @@ namespace FuhrparkverwaltungTests
             //Assert
             Assert.AreEqual(kilometerstand, a.Kilometerstand);
         }
+        [TestMethod]
+        public void Verbrauch_KannBerechnetWerden()
+        {
+            //Arrange
+            int kilometerstand = 10;
+            double fuellstandInLiter = 30;
+            double verbrauch = 5.7;
+            Auto a = new Auto(kilometerstand, fuellstandInLiter, verbrauch);
+            int streckeInKilometern = 100;
+
+            //Act
+            a.Fahren(streckeInKilometern);
+
+            //Assert
+            Assert.AreEqual(24.3, a.FuellstandInLiter);
+        }
     }
 }

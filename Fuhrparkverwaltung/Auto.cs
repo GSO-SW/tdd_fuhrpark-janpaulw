@@ -9,6 +9,15 @@ namespace Fuhrparkverwaltung
     public class Auto
     {
         private int kilometerstand;
+        private double fuellstandInLiter;
+        private double verbrauch;
+
+        public Auto(int kilometerstand, double fuellstandInLiter, double verbrauch) : this(kilometerstand)
+        {
+            this.fuellstandInLiter = fuellstandInLiter;
+            this.verbrauch = verbrauch;
+        }
+
         public Auto(int kilometerstand)
         {
             this.kilometerstand = kilometerstand;
@@ -19,6 +28,7 @@ namespace Fuhrparkverwaltung
             if (zurueckgelegteStreckeInKm > 0)
             {
                 this.kilometerstand += zurueckgelegteStreckeInKm;
+                fuellstandInLiter -=  (verbrauch*100) / zurueckgelegteStreckeInKm;
             }
         }
         public int Kilometerstand
@@ -26,6 +36,13 @@ namespace Fuhrparkverwaltung
             get 
             { 
                 return this.kilometerstand;
+            }
+        }
+        public double FuellstandInLiter
+        {
+            get
+            {
+                return fuellstandInLiter;
             }
         }
     }
