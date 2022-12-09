@@ -16,7 +16,10 @@ namespace Fuhrparkverwaltung
 
         public void Fahren(int zurueckgelegteStreckeInKm)
         {
-            this.kilometerstand += zurueckgelegteStreckeInKm;
+            if (zurueckgelegteStreckeInKm > 0)
+            {
+                this.kilometerstand += zurueckgelegteStreckeInKm;
+            }
         }
         public int Kilometerstand
         {
