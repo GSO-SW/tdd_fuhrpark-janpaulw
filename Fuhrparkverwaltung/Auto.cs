@@ -8,34 +8,49 @@ namespace Fuhrparkverwaltung
 {
     public class Auto
     {
-        private int kilometerstand;
+        private double kilometerstand;
         private double fuellstandInLiter;
         private double verbrauch;
 
-        public Auto(int kilometerstand, double fuellstandInLiter, double verbrauch) : this(kilometerstand)
+        public Auto(double kilometerstand, double fuellstandInLiter, double verbrauch) : this(kilometerstand)
         {
             this.fuellstandInLiter = fuellstandInLiter;
             this.verbrauch = verbrauch;
         }
 
-        public Auto(int kilometerstand)
+        public Auto(double kilometerstand)
         {
             this.kilometerstand = kilometerstand;
         }
 
-        public void Fahren(int zurueckgelegteStreckeInKm)
+        public void Fahren(double zurueckgelegteStreckeInKm)
         {
             if (zurueckgelegteStreckeInKm > 0)
             {
-                fuellstandInLiter -=  (verbrauch*100) / zurueckgelegteStreckeInKm;
-                if (fuellstandInLiter > 0)
+                if (FuellstandZuNiedrig(zurueckgelegteStreckeInKm))
                 {
-
+                    fuellstandInLiter -=  (verbrauch/100) * zurueckgelegteStreckeInKm;
                     this.kilometerstand += zurueckgelegteStreckeInKm;
+                }
+                else
+                {
+                    kilometerstand += (fuellstandInLiter / verbrauch) * 100;
                 }
             }
         }
-        public int Kilometerstand
+
+        private bool FuellstandZuNiedrig(double zurueckgelegteStreckeInKm)
+        {
+            if (fuellstandInLiter >= (verbrauch/100*zurueckgelegteStreckeInKm))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public double Kilometerstand
         {
             get 
             { 

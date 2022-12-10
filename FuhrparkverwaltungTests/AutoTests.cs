@@ -7,12 +7,12 @@ namespace FuhrparkverwaltungTests
     public class AutoTests
     {
         [TestMethod]
-        public void Fahren_SteigertKilometerstand()
+         public void Fahren_SteigertKilometerstand()
         {
             //Arrange
-            int kilometerstand = 0;
+            double kilometerstand = 0;
             Auto a = new Auto(kilometerstand);
-            int streckeInKilometern = 50;
+            double streckeInKilometern = 50;
 
             //Act
             a.Fahren(streckeInKilometern);
@@ -25,9 +25,9 @@ namespace FuhrparkverwaltungTests
         public void Kilometerstand_SollNichtVerändertWerdenBeiNegativemWert()
         {
             //Arragne
-            int kilometerstand = 10;
+            double kilometerstand = 10;
             Auto a = new Auto(kilometerstand);
-            int streckeInKilometern = -10;
+            double streckeInKilometern = -10;
 
             //Act
             a.Fahren(streckeInKilometern);
@@ -39,11 +39,11 @@ namespace FuhrparkverwaltungTests
         public void Verbrauch_KannBerechnetWerden()
         {
             //Arrange
-            int kilometerstand = 10;
+            double kilometerstand = 10;
             double fuellstandInLiter = 30;
             double verbrauch = 5.7;
             Auto a = new Auto(kilometerstand, fuellstandInLiter, verbrauch);
-            int streckeInKilometern = 100;
+            double streckeInKilometern = 100;
 
             //Act
             a.Fahren(streckeInKilometern);
@@ -55,17 +55,37 @@ namespace FuhrparkverwaltungTests
         public void Fahren_MitZuWenigFuellstand()
         {
             //Arrange
-            int kilometerstand = 10;
+            double kilometerstand = 0;
             double fuellstandInLiter = 10;
             double verbrauch = 5.7;
             Auto a = new Auto(kilometerstand, fuellstandInLiter, verbrauch);
-            int streckeInKilometern = 200;
+            double streckeInKilometern = 200;
 
             //Act
             a.Fahren(streckeInKilometern);
 
             //Assert
-            Assert.AreEqual(10, a.Kilometerstand);
+            Assert.AreNotEqual(kilometerstand, a.Kilometerstand);
+
+            //Wird aufgrund des nächsten Tests auf diesen Wert gesetzt
+            //Würde man den else-Block weg lassen,
+            //würde der Wert auf dem Standartwert bleiben
+        }
+        [TestMethod]
+        public void Fahren_KannNurSoVielWieDieFuellmengeHergibt()
+        {
+            //Arrange
+            double kilometerstand = 0;
+            double fuellstandInLiter = 10;
+            double verbrauch = 10;
+            Auto a = new Auto(kilometerstand, fuellstandInLiter, verbrauch);
+            double streckeInKilometern = 400;
+
+            //Act
+            a.Fahren(streckeInKilometern);
+
+            //Assert
+            Assert.AreEqual(fuellstandInLiter/verbrauch*100, a.Kilometerstand);
         }
     }
 }
