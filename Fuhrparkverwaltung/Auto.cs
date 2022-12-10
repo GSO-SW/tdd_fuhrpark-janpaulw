@@ -25,7 +25,7 @@ namespace Fuhrparkverwaltung
 
         public void Fahren(double zurueckgelegteStreckeInKm)
         {
-            if (zurueckgelegteStreckeInKm > 0)
+            if (ZurueckgelegteKilometerGroesserAlsNull(zurueckgelegteStreckeInKm))
             {
                 if (FuellstandZuNiedrig(zurueckgelegteStreckeInKm))
                 {
@@ -39,6 +39,17 @@ namespace Fuhrparkverwaltung
             }
         }
 
+        private bool ZurueckgelegteKilometerGroesserAlsNull(double zurueckgelegteStreckeInKm)
+        {
+            if (zurueckgelegteStreckeInKm > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private bool FuellstandZuNiedrig(double zurueckgelegteStreckeInKm)
         {
             if (fuellstandInLiter >= (verbrauch/100*zurueckgelegteStreckeInKm))
