@@ -8,10 +8,14 @@ namespace Fuhrparkverwaltung
 {
     public class Auto
     {
+        #region Attribute
         private double kilometerstand;
         private double fuellstandInLiter;
         private double verbrauch;
+        #endregion
 
+
+        #region Konstruktoren
         public Auto(double kilometerstand, double fuellstandInLiter, double verbrauch) : this(kilometerstand)
         {
             this.fuellstandInLiter = fuellstandInLiter;
@@ -22,7 +26,10 @@ namespace Fuhrparkverwaltung
         {
             this.kilometerstand = kilometerstand;
         }
+        #endregion
 
+
+        #region Fahren
         public void Fahren(double zurueckgelegteStreckeInKm)
         {
             if (ZurueckgelegteKilometerGroesserAlsNull(zurueckgelegteStreckeInKm))
@@ -38,7 +45,10 @@ namespace Fuhrparkverwaltung
                 }
             }
         }
+        #endregion
 
+
+        #region Verarbeitung der Abfragen in Methoden
         private bool ZurueckgelegteKilometerGroesserAlsNull(double zurueckgelegteStreckeInKm)
         {
             if (zurueckgelegteStreckeInKm > 0)
@@ -61,6 +71,10 @@ namespace Fuhrparkverwaltung
                 return false;
             }
         }
+        #endregion
+
+
+        #region Eigenschaften
         public double Kilometerstand
         {
             get 
@@ -75,5 +89,6 @@ namespace Fuhrparkverwaltung
                 return fuellstandInLiter;
             }
         }
+        #endregion
     }
 }
