@@ -28,7 +28,11 @@ namespace Fuhrparkverwaltung
             if (zurueckgelegteStreckeInKm > 0)
             {
                 fuellstandInLiter -=  (verbrauch*100) / zurueckgelegteStreckeInKm;
-                this.kilometerstand += zurueckgelegteStreckeInKm;
+                if (fuellstandInLiter > 0)
+                {
+
+                    this.kilometerstand += zurueckgelegteStreckeInKm;
+                }
             }
         }
         public int Kilometerstand
