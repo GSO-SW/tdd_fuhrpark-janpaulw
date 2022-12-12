@@ -21,7 +21,6 @@ namespace Fuhrparkverwaltung
             this.fuellstandInLiter = fuellstandInLiter;
             this.verbrauch = verbrauch;
         }
-
         public Auto(double kilometerstand)
         {
             this.kilometerstand = kilometerstand;
@@ -36,8 +35,7 @@ namespace Fuhrparkverwaltung
             {
                 if (FuellstandZuNiedrig(zurueckgelegteStreckeInKm))
                 {
-                    fuellstandInLiter -=  (verbrauch/100) * zurueckgelegteStreckeInKm;
-                    this.kilometerstand += zurueckgelegteStreckeInKm;
+                    FuellstandUndKilometeranzahlBerechnen(zurueckgelegteStreckeInKm);
                 }
                 else
                 {
@@ -70,6 +68,11 @@ namespace Fuhrparkverwaltung
             {
                 return false;
             }
+        }
+        private void FuellstandUndKilometeranzahlBerechnen(double zurueckgelegteStreckeInKm)
+        {
+            fuellstandInLiter -= (verbrauch * 100) / zurueckgelegteStreckeInKm;
+            this.kilometerstand += zurueckgelegteStreckeInKm;
         }
         #endregion
 
